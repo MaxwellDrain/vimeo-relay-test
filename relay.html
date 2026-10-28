@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vimeo relay test</title>
+<style>html,body{margin:0;height:100%;background:#000}iframe{border:0;width:100%;height:100%}</style>
+</head>
+<body>
+<script>
+// Usage: relay.html?v={vimeo id}&h={unlisted hash, optional}
+var p = new URLSearchParams(location.search);
+var v = (p.get('v') || '').replace(/\D/g, '');
+var h = (p.get('h') || '').replace(/[^0-9a-f]/gi, '');
+if (v) {
+  var f = document.createElement('iframe');
+  f.src = 'https://player.vimeo.com/video/' + v + (h ? '?h=' + h : '');
+  f.allow = 'autoplay; fullscreen; picture-in-picture';
+  document.body.appendChild(f);
+} else {
+  document.body.style.color = '#fff';
+  document.body.textContent = 'Add ?v={vimeo video id} to the address.';
+}
+</script>
+</body>
+</html>
